@@ -45,6 +45,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.title = new System.Windows.Forms.TextBox();
             this.resetButton = new System.Windows.Forms.Button();
+            this.scoreBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -158,14 +159,14 @@
             // history
             // 
             this.history.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.history.Location = new System.Drawing.Point(918, 182);
+            this.history.Location = new System.Drawing.Point(891, 347);
             this.history.MinimumSize = new System.Drawing.Size(464, 33);
             this.history.Multiline = true;
             this.history.Name = "history";
             this.history.ReadOnly = true;
             this.history.Size = new System.Drawing.Size(464, 33);
             this.history.TabIndex = 10;
-            this.history.Text = "Hover for History";
+            this.history.Text = "History";
             this.history.MouseLeave += new System.EventHandler(this.history_MouseLeave);
             this.history.MouseHover += new System.EventHandler(this.history_MouseHover);
             // 
@@ -177,6 +178,7 @@
             this.textBox1.Size = new System.Drawing.Size(304, 31);
             this.textBox1.TabIndex = 11;
             this.textBox1.Text = "Player 1";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelX
             // 
@@ -206,6 +208,7 @@
             this.textBox2.Size = new System.Drawing.Size(304, 31);
             this.textBox2.TabIndex = 13;
             this.textBox2.Text = "Player 2";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // title
             // 
@@ -229,12 +232,23 @@
             this.resetButton.UseVisualStyleBackColor = false;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
+            // scoreBox
+            // 
+            this.scoreBox.Location = new System.Drawing.Point(891, 183);
+            this.scoreBox.Multiline = true;
+            this.scoreBox.Name = "scoreBox";
+            this.scoreBox.ReadOnly = true;
+            this.scoreBox.Size = new System.Drawing.Size(464, 62);
+            this.scoreBox.TabIndex = 17;
+            this.scoreBox.Text = "Score: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1410, 845);
+            this.Controls.Add(this.scoreBox);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.title);
             this.Controls.Add(this.labelO);
@@ -280,6 +294,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox title;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.TextBox scoreBox;
     }
 }
 

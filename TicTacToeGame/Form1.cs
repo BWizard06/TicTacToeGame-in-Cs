@@ -23,6 +23,9 @@ namespace TicTacToeGame
 
         int currentRound = 1;
 
+        int scoreX = 0;
+        int scoreO = 0;
+
         public String returnSymbol(int turn)
         {
             if( turn % 2 == 0)
@@ -109,6 +112,7 @@ namespace TicTacToeGame
 
                 if (combination.Equals("OOO"))
                 {
+                    scoreO++;
                     changeColor(one);
                     changeColor(two);
                     changeColor(three);
@@ -119,6 +123,7 @@ namespace TicTacToeGame
                 }
                 else if(combination.Equals("XXX"))
                 {
+                    scoreX++;
                     changeColor(one);
                     changeColor(two);
                     changeColor(three);
@@ -129,6 +134,8 @@ namespace TicTacToeGame
                 }
 
                 checkDraw();
+
+                scoreBox.Text = "Score: " + Environment.NewLine + $"({textBox1.Text}) {scoreX} - {scoreO} ({textBox2.Text})";
             }
         }
 
@@ -308,6 +315,26 @@ namespace TicTacToeGame
         private void resetButton_Click(object sender, EventArgs e)
         {
             reset();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            currentRound = 1;
+            scoreX = 0;
+            scoreO = 0;
+            scoreBox.Text = "Score: " + Environment.NewLine + $"({textBox1.Text}) {scoreX} - {scoreO} ({textBox2.Text})";
+            history.Clear();
+            history.Text = "History";
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            currentRound = 1;
+            scoreX = 0;
+            scoreO = 0;
+            scoreBox.Text = "Score: " + Environment.NewLine + $"({textBox1.Text}) {scoreX} - {scoreO} ({textBox2.Text})";
+            history.Clear();
+            history.Text = "History";
         }
     }
 }
