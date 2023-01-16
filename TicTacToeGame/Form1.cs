@@ -26,6 +26,9 @@ namespace TicTacToeGame
         int scoreX = 0;
         int scoreO = 0;
 
+        // A variable to check if somebody wins on the last turn.
+        int notDraw = 0;
+
         public String returnSymbol(int turn)
         {
             if( turn % 2 == 0)
@@ -112,6 +115,7 @@ namespace TicTacToeGame
 
                 if (combination.Equals("OOO"))
                 {
+                    notDraw = 1;
                     scoreO++;
                     changeColor(one);
                     changeColor(two);
@@ -121,8 +125,9 @@ namespace TicTacToeGame
                     history.AppendText(Environment.NewLine);
                     history.AppendText($"{textBox2.Text} won the {currentRound}. game");
                 }
-                else if(combination.Equals("XXX"))
+                else if (combination.Equals("XXX"))
                 {
+                    notDraw = 1;
                     scoreX++;
                     changeColor(one);
                     changeColor(two);
@@ -132,36 +137,56 @@ namespace TicTacToeGame
                     history.AppendText(Environment.NewLine);
                     history.AppendText($"{textBox1.Text} won the {currentRound}. game");
                 }
-
-                checkDraw();
-
                 scoreBox.Text = "Score: " + Environment.NewLine + $"({textBox1.Text}) {scoreX} - {scoreO} ({textBox2.Text})";
             }
+            // outside of for loop so it doesn't repeat itself
+            checkDraw();
+
         }
 
         public void reset()
         {
-            button1.Text = "";
-            button2.Text = "";
-            button3.Text = "";
-            button4.Text = "";
-            button5.Text = "";
-            button6.Text = "";
-            button7.Text = "";
-            button8.Text = "";
-            button9.Text = "";
-            button1.BackColor = System.Drawing.Color.LightGray;
-            button2.BackColor = System.Drawing.Color.LightGray;
-            button3.BackColor = System.Drawing.Color.LightGray;
-            button4.BackColor = System.Drawing.Color.LightGray;
-            button5.BackColor = System.Drawing.Color.LightGray;
-            button6.BackColor = System.Drawing.Color.LightGray;
-            button7.BackColor = System.Drawing.Color.LightGray;
-            button8.BackColor = System.Drawing.Color.LightGray;
-            button9.BackColor = System.Drawing.Color.LightGray;
+            foreach(Control x in this.Controls)
+            {
+                if(x is Button && (x.Text == "X" | x.Text == "O") )
+                {
+                    x.Enabled = true;
+                    x.Text = "";
+                    x.BackColor = Color.LightGray;
+                }
+                
+            }
+            // button1.Text = "";
+            // button2.Text = "";
+            // button3.Text = "";
+            // button4.Text = "";
+            // button5.Text = "";
+            // button6.Text = "";
+            // button7.Text = "";
+            // button8.Text = "";
+            // button9.Text = "";
+            // button1.BackColor = System.Drawing.Color.LightGray;
+            // button2.BackColor = System.Drawing.Color.LightGray;
+            // button3.BackColor = System.Drawing.Color.LightGray;
+            // button4.BackColor = System.Drawing.Color.LightGray;
+            // button5.BackColor = System.Drawing.Color.LightGray;
+            // button6.BackColor = System.Drawing.Color.LightGray;
+            // button7.BackColor = System.Drawing.Color.LightGray;
+            // button8.BackColor = System.Drawing.Color.LightGray;
+            // button9.BackColor = System.Drawing.Color.LightGray;
+            // button1.Enabled = true;
+            // button2.Enabled = true;
+            // button3.Enabled = true;
+            // button4.Enabled = true;
+            // button5.Enabled = true;
+            // button6.Enabled = true;
+            // button7.Enabled = true;
+            // button8.Enabled = true;
+            // button9.Enabled = true;
             gameBoard = new string[9];
             currentTurn = 0;
             currentRound++;
+            notDraw = 0;
         }
 
         public void changeColor( int number)
@@ -208,15 +233,15 @@ namespace TicTacToeGame
                 {
                     counter++;
                 }
-
-                if(counter == 9)
+                if (counter == 9 && notDraw == 0)
                 {
                     // MessageBox.Show("It's a draw!", "We have no winner!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     // history.Text = "Last game was a draw";
                     history.AppendText(Environment.NewLine);
-                    history.AppendText($"\nGame {currentRound} was a Tie");
+                    history.AppendText($"Game {currentRound} was a Tie");
                 }
             }
+
         }
 
 
@@ -228,6 +253,7 @@ namespace TicTacToeGame
             button1.Text = gameBoard[0];
             button1.BackColor = determineColor(gameBoard[0]);
             checkForWinner();
+            button1.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -237,6 +263,7 @@ namespace TicTacToeGame
             button2.Text = gameBoard[1];
             button2.BackColor = determineColor(gameBoard[1]);
             checkForWinner();
+            button2.Enabled = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -246,6 +273,7 @@ namespace TicTacToeGame
             button3.Text = gameBoard[2];
             button3.BackColor = determineColor(gameBoard[2]);
             checkForWinner();
+            button3.Enabled = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -255,6 +283,7 @@ namespace TicTacToeGame
             button4.Text = gameBoard[3];
             button4.BackColor = determineColor(gameBoard[3]);
             checkForWinner();
+            button4.Enabled = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -264,6 +293,7 @@ namespace TicTacToeGame
             button5.Text = gameBoard[4];
             button5.BackColor = determineColor(gameBoard[4]);
             checkForWinner();
+            button5.Enabled = false;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -273,6 +303,7 @@ namespace TicTacToeGame
             button6.Text = gameBoard[5];
             button6.BackColor = determineColor(gameBoard[5]);
             checkForWinner();
+            button6.Enabled = false;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -282,6 +313,7 @@ namespace TicTacToeGame
             button7.Text = gameBoard[6];
             button7.BackColor = determineColor(gameBoard[6]);
             checkForWinner();
+            button7.Enabled = false;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -291,6 +323,7 @@ namespace TicTacToeGame
             button8.Text = gameBoard[7];
             button8.BackColor = determineColor(gameBoard[7]);
             checkForWinner();
+            button8.Enabled = false;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -300,6 +333,7 @@ namespace TicTacToeGame
             button9.Text = gameBoard[8];
             button9.BackColor = determineColor(gameBoard[8]);
             checkForWinner();
+            button9.Enabled = false;
         }
 
         private void history_MouseHover(object sender, EventArgs e)
@@ -335,6 +369,13 @@ namespace TicTacToeGame
             scoreBox.Text = "Score: " + Environment.NewLine + $"({textBox1.Text}) {scoreX} - {scoreO} ({textBox2.Text})";
             history.Clear();
             history.Text = "History";
+        }
+
+        private void changeNameButton_Click(object sender, EventArgs e)
+        { 
+            string currentNamePlayer1 = textBox1.Text;
+            textBox1.Text = textBox2.Text;
+            textBox2.Text = currentNamePlayer1;
         }
     }
 }
