@@ -20,6 +20,7 @@ namespace TicTacToeGame
 
         String[] gameBoard = new string[9];
         int currentTurn = 0;
+        
 
         int currentRound = 1;
 
@@ -49,7 +50,7 @@ namespace TicTacToeGame
             }
             else if(symbol.Equals("X"))
             {
-                return System.Drawing.Color.Chartreuse;
+                return System.Drawing.Color.LightGreen;
             }
             return System.Drawing.Color.LightGray;
         }
@@ -115,25 +116,36 @@ namespace TicTacToeGame
 
                 if (combination.Equals("OOO"))
                 {
+                    foreach (Control x in this.Controls)
+                    {
+                        if (x is Button && x.Text == "")
+                        {
+                            x.Enabled = false;
+                        }
+                    }
                     notDraw = 1;
                     scoreO++;
                     changeColor(one);
                     changeColor(two);
                     changeColor(three);
-                    // MessageBox.Show($"{textBox2.Text} has won the game!", "We have a winner!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    // title.Text = $"\n{textBox2.Text} won the last game";
                     history.AppendText(Environment.NewLine);
                     history.AppendText($"{textBox2.Text} won the {currentRound}. game");
                 }
                 else if (combination.Equals("XXX"))
                 {
+                    foreach (Control x in this.Controls)
+                    {
+                        if (x is Button && x.Text == "")
+                        {
+                            x.Enabled = false;
+                        }
+                    }
                     notDraw = 1;
                     scoreX++;
+                    // Change color to red from every winner button
                     changeColor(one);
                     changeColor(two);
                     changeColor(three);
-                    // MessageBox.Show($"{textBox1.Text} has won the game!", "We have a winner!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    // title.Text = $"\n{textBox1.Text} won the last game";
                     history.AppendText(Environment.NewLine);
                     history.AppendText($"{textBox1.Text} won the {currentRound}. game");
                 }
@@ -148,13 +160,12 @@ namespace TicTacToeGame
         {
             foreach(Control x in this.Controls)
             {
-                if(x is Button && (x.Text == "X" | x.Text == "O") )
+                if (x is Button && (x.Text == "X" | x.Text == "O"))
                 {
                     x.Enabled = true;
                     x.Text = "";
                     x.BackColor = Color.LightGray;
                 }
-                
             }
             // button1.Text = "";
             // button2.Text = "";
